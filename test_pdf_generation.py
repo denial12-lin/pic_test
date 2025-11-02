@@ -7,6 +7,7 @@ import os
 import sys
 import tempfile
 import shutil
+import subprocess
 from pathlib import Path
 
 # Import the PDF generation module
@@ -72,8 +73,12 @@ def test_command_line():
     print("\nTesting command-line execution...")
     
     # Test help option
-    result = os.system("python generate_pdf.py --help > /dev/null 2>&1")
-    if result == 0:
+    result = subprocess.run(
+        [sys.executable, "generate_pdf.py", "--help"],
+        capture_output=True,
+        text=True
+    )
+    if result.returncode == 0:
         print("✓ Help option works")
     else:
         print("✗ Help option failed")

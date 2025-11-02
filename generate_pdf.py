@@ -5,6 +5,7 @@ Converts images to PDF format with optional text content.
 """
 
 import os
+import sys
 import glob
 from pathlib import Path
 try:
@@ -15,7 +16,7 @@ try:
 except ImportError:
     print("Required libraries not found. Please install:")
     print("  pip install reportlab Pillow")
-    exit(1)
+    sys.exit(1)
 
 
 def create_pdf_from_images(output_filename="output.pdf", greeting_text="你好"):
@@ -75,7 +76,7 @@ def create_pdf_from_images(output_filename="output.pdf", greeting_text="你好")
             
             # Draw image
             c.drawImage(img_file, x, y, width=scaled_width, height=scaled_height, 
-                       preserveAspectRatio=True, mask='auto')
+                       mask='auto')
             
             # Add caption
             c.setFont("Helvetica", 10)
